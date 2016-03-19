@@ -1,0 +1,21 @@
+extends ../layouts/main
+
+block body
+  h1 Tags
+
+  table
+    tr
+      th(rowspan=2) Name
+      th(colspan=2) Droplets
+
+    tr
+      th Count
+      th Last tagged
+
+    each tag in tags
+      tr
+        td
+          a(href="/tag/#{tag.name}") #{tag.name}
+        td #{tag.resources.droplets.count}
+        td
+          a(href="/droplet/#{tag.resources.droplets.last_tagged.id}") #{tag.resources.droplets.last_tagged.name}

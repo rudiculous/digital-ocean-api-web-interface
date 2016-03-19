@@ -1,0 +1,19 @@
+extends ../layouts/main
+
+block body
+  h1 Droplet "#{droplet.name}"
+
+  h2 System
+  table
+    tr
+      th Status
+      td #{droplet.status}
+    tr
+      th CPU
+      td #{droplet.vcpus}x
+    tr
+      th Memory
+      td #{droplet.memory} MB
+    tr
+      th Disk
+      td #{droplet.disk} GB
