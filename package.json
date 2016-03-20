@@ -1,9 +1,17 @@
 {
+  "main": "index.js",
   "private": true,
+  "scripts": {
+    "preinstall": "mkdir -p ./var/log",
+    "restart": "forever restart index.js",
+    "start": "forever --append -l do-api.forever.log -o var/log/stdout.log -e var/log/stderr.log start index.js",
+    "stop": "forever stop index.js"
+  },
   "dependencies": {
     "body-parser": "^1.15.0",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
+    "forever": "^0.15.1",
     "jade": "^1.11.0"
   }
 }
