@@ -8,15 +8,15 @@ block body
     each droplet in droplets
       tr
         td
-          a(href="/droplet/#{droplet.id}") #{droplet.name}
+          a(href="#{pathPrefix}/droplet/#{droplet.id}") #{droplet.name}
         td
-          form(method="post" action="/tag/#{tag.name}/untag" style="display:inline" class="form-inline")
+          form(method="post" action="#{pathPrefix}/tag/#{tag.name}/untag" style="display:inline" class="form-inline")
             input(type="hidden" name="dropletId" value="#{droplet.id}")
-            input(type="hidden" name="redirect" value="/tag/#{tag.name}")
+            input(type="hidden" name="redirect" value="#{pathPrefix}/tag/#{tag.name}")
             button(type="submit" class="btn btn-xs btn-default") Untag
 
   h3 Tag More Droplets
-  form(method="post" action="/tag/#{tag.name}/tag" class="form-inline")
+  form(method="post" action="#{pathPrefix}/tag/#{tag.name}/tag" class="form-inline")
     .form-group
       label(for="dropletToTag") Droplet:
       select(id="dropletToTag" name="dropletId" class="form-control")
