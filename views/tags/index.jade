@@ -3,19 +3,33 @@ extends ../layouts/main
 block body
   h1 Tags
 
-  table
-    tr
-      th(rowspan=2) Name
-      th(colspan=2) Droplets
-
-    tr
-      th Count
-      th Last tagged
-
-    each tag in tags
+  .table-responsive
+    table(class="table")
       tr
-        td
-          a(href="/tag/#{tag.name}") #{tag.name}
-        td #{tag.resources.droplets.count}
-        td
-          a(href="/droplet/#{tag.resources.droplets.last_tagged.id}") #{tag.resources.droplets.last_tagged.name}
+        th Name
+        th Droplet Count
+        th Last Droplet Tagged
+        th Actions
+
+      each tag in tags
+        tr
+          td
+            a(href="/tag/#{tag.name}") #{tag.name}
+          td #{tag.resources.droplets.count}
+          td
+            if tag.resources.droplets.last_tagged
+              a(href="/droplet/#{tag.resources.droplets.last_tagged.id}") #{tag.resources.droplets.last_tagged.name}
+            else
+              | -
+          td
+            form(method="post" action="/tag/#{tag.name}/destroy" style="display:inline" class="form-inline")
+              input(type="hidden" name="name" value="#{tag.name}")
+              button(type="submit" class="btn btn-xs btn-default") Delete
+
+  h3 Create Tag
+  form(method="post" action="/tags" class="form-inline")
+    .form-group
+      label(for="tagName") Name:
+      input(type="text" id="tagName" name="name" class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+
+    button(type="submit" class="btn btn-default") Create

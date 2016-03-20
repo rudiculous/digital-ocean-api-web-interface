@@ -4,7 +4,24 @@ block body
   h1 Tag "#{tag.name}"
 
   h2 Droplets
-  ul
+  table(class="table")
     each droplet in droplets
-      li
-        a(href="/droplet/#{droplet.id}") #{droplet.name}
+      tr
+        td
+          a(href="/droplet/#{droplet.id}") #{droplet.name}
+        td
+          form(method="post" action="/tag/#{tag.name}/untag" style="display:inline" class="form-inline")
+            input(type="hidden" name="dropletId" value="#{droplet.id}")
+            input(type="hidden" name="redirect" value="/tag/#{tag.name}")
+            button(type="submit" class="btn btn-xs btn-default") Untag
+
+  h3 Tag More Droplets
+  form(method="post" action="/tag/#{tag.name}/tag" class="form-inline")
+    .form-group
+      label(for="dropletToTag") Droplet:
+      select(id="dropletToTag" name="dropletId" class="form-control")
+        option
+        each droplet in allDroplets
+          option(value="#{droplet.id}") #{droplet.name}
+
+    button(type="submit" class="btn btn-default") Tag

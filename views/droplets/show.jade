@@ -4,7 +4,7 @@ block body
   h1 Droplet "#{droplet.name}"
 
   h2 System
-  table
+  table(class="table")
     tr
       th Status
       td #{droplet.status}
@@ -17,3 +17,15 @@ block body
     tr
       th Disk
       td #{droplet.disk} GB
+
+  h2 Tags
+  table(class="table")
+    each tag in droplet.tags
+      tr
+        td
+          a(href="/tag/#{tag}") #{tag}
+        td
+          form(method="post" action="/tag/#{tag}/untag" style="display:inline" class="form-inline")
+            input(type="hidden" name="dropletId" value="#{droplet.id}")
+            input(type="hidden" name="redirect" value="/droplet/#{droplet.id}")
+            button(type="submit" class="btn btn-xs btn-default") Untag
