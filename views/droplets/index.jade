@@ -1,0 +1,14 @@
+extends ../layouts/main
+
+block body
+  h1 Droplet
+
+  .table-responsive
+    table.table
+      tr
+        th Name
+
+      each droplet in droplets
+        tr
+          td
+            a(href="#{pathPrefix}/droplet/#{droplet.id}") #{droplet.name}

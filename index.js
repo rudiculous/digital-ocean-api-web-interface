@@ -17,6 +17,10 @@ const pathPrefix = process.env.PATH_PREFIX
 app.locals.pathPrefix = pathPrefix
 
 
+app.get(`${pathPrefix}`, (request, response) => {
+  response.render('index')
+})
+
 app.get(`${pathPrefix}/tags`, (request, response) => {
   api.getTags()
     .then(data => response.render('tags/index', data))
@@ -90,6 +94,12 @@ app.post(`${pathPrefix}/tag/:name/untag`, (request, response) => {
       // FIXME: Pass message.
       response.redirect(redirect)
     })
+    .catch(errorHandler(request, response))
+})
+
+app.get(`${pathPrefix}/droplets`, (request, response) => {
+  api.getDroplets()
+    .then(data => response.render('droplets/index', data))
     .catch(errorHandler(request, response))
 })
 

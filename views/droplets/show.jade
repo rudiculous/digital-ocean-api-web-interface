@@ -4,7 +4,7 @@ block body
   h1 Droplet "#{droplet.name}"
 
   h2 System
-  table(class="table")
+  table.table
     tr
       th Status
       td #{droplet.status}
@@ -19,13 +19,13 @@ block body
       td #{droplet.disk} GB
 
   h2 Tags
-  table(class="table")
+  table.table
     each tag in droplet.tags
       tr
         td
           a(href="#{pathPrefix}/tag/#{tag}") #{tag}
         td
-          form(method="post" action="#{pathPrefix}/tag/#{tag}/untag" style="display:inline" class="form-inline")
+          form(method="post" action="#{pathPrefix}/tag/#{tag}/untag")
             input(type="hidden" name="dropletId" value="#{droplet.id}")
             input(type="hidden" name="redirect" value="#{pathPrefix}/droplet/#{droplet.id}")
-            button(type="submit" class="btn btn-xs btn-default") Untag
+            button.btn.btn-xs.btn-danger(type="submit") Untag

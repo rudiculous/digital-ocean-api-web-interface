@@ -4,7 +4,7 @@ block body
   h1 Tags
 
   .table-responsive
-    table(class="table")
+    table.table
       tr
         th Name
         th Droplet Count
@@ -22,14 +22,14 @@ block body
             else
               | -
           td
-            form(method="post" action="#{pathPrefix}/tag/#{tag.name}/destroy" style="display:inline" class="form-inline")
+            form(method="post" action="#{pathPrefix}/tag/#{tag.name}/destroy")
               input(type="hidden" name="name" value="#{tag.name}")
-              button(type="submit" class="btn btn-xs btn-default") Delete
+              button.btn.btn-xs.btn-danger(type="submit") Delete Tag
 
   h3 Create Tag
-  form(method="post" action="#{pathPrefix}/tags" class="form-inline")
-    .form-group
-      label(for="tagName") Name:
-      input(type="text" id="tagName" name="name" class="form-control" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
-
-    button(type="submit" class="btn btn-default") Create
+  form.form-inline(method="post" action="#{pathPrefix}/tags")
+    .input-group
+      label.input-group-addon(for="tagName") Name:
+      input#tagName.form-control(type="text" name="name" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+      .input-group-btn
+        button.btn.btn-default(type="submit") Create

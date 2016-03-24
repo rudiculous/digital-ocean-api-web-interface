@@ -4,24 +4,24 @@ block body
   h1 Tag "#{tag.name}"
 
   h2 Droplets
-  table(class="table")
+  table.table
     each droplet in droplets
       tr
         td
           a(href="#{pathPrefix}/droplet/#{droplet.id}") #{droplet.name}
         td
-          form(method="post" action="#{pathPrefix}/tag/#{tag.name}/untag" style="display:inline" class="form-inline")
+          form(method="post" action="#{pathPrefix}/tag/#{tag.name}/untag")
             input(type="hidden" name="dropletId" value="#{droplet.id}")
             input(type="hidden" name="redirect" value="#{pathPrefix}/tag/#{tag.name}")
-            button(type="submit" class="btn btn-xs btn-default") Untag
+            button.btn.btn-xs.btn-danger(type="submit") Untag
 
   h3 Tag More Droplets
-  form(method="post" action="#{pathPrefix}/tag/#{tag.name}/tag" class="form-inline")
-    .form-group
-      label(for="dropletToTag") Droplet:
-      select(id="dropletToTag" name="dropletId" class="form-control")
+  form.form-inline(method="post" action="#{pathPrefix}/tag/#{tag.name}/tag")
+    .input-group
+      label.input-group-addon(for="dropletToTag") Droplet:
+      select#dropletToTag.form-control(name="dropletId")
         option
         each droplet in allDroplets
           option(value="#{droplet.id}") #{droplet.name}
-
-    button(type="submit" class="btn btn-default") Tag
+      .input-group-btn
+        button.btn.btn-default(type="submit") Tag
